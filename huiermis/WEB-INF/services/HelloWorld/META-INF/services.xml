@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup>
+	<service name="HelloWorld">
+		<description>
+			HelloWorld Service Example
+		</description>
+		<parameter name="ServiceClass">
+			com.cm.service.HelloWorld
+		</parameter>
+		<operation name="sayHello">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="saySorry">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="getWorld">
+			<messageReceiver
+				class="org.apache.axis2.rpc.receivers.RPCInOnlyMessageReceiver" />
+		</operation>
+	</service>
+	<service name="BatteryService">
+		<description>
+			电池库存修改
+		</description>
+		<parameter name="ServiceClass">
+			com.cm.service.BatteryService
+		</parameter>
+		<operation name="delmembat">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="addmembat">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="batEvent">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="battChange">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="batEventChange">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="insertScore">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="battNum">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="judgeOld">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="checkTel">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+	</service>
+	<service name="initCusService">
+		<description>
+			初始化用户列表
+		</description>
+		<parameter name="ServiceClass">
+			com.cm.service.initCusService
+		</parameter>
+		<operation name="initCustomer">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="queryUserById">
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="queryUserByupdatetime">
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="geneUserid">
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+	</service>
+	<service name="uploadService">
+		<description>
+			上传和下载听力数据
+		</description>
+		<parameter name="ServiceClass">
+			com.cm.service.uploadService
+		</parameter>
+		<operation name="downByguid">
+			<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="uploadData">
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="getlistenclient">
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+		<operation name="getlistenshop">
+		<messageReceiver class="org.apache.axis2.rpc.receivers.RPCMessageReceiver" />
+		</operation>
+	</service>
+	<service name="FileOperation">
+    <description>
+        This is a sample Web Service with two operations,echo and ping.
+    </description>
+    <parameter name="ServiceClass" locked="false">com.cm.service.FileTransferServer</parameter>
+    <operation name="upload">
+        <actionMapping>urn:upload</actionMapping>
+        <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+    </operation>
+      <operation name="download">
+        <actionMapping>urn:download</actionMapping>
+        <messageReceiver class="org.apache.axis2.receivers.RawXMLINOutMessageReceiver"/>
+    </operation>
+</service>
+</serviceGroup>

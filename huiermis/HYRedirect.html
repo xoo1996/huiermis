@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<meta http-equiv="X-UA-Compatible" content="IE=6">  
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <title>会员系统引导页面</title>
+
+ <script language="javascript">
+ var temp = "http://"
+ 
+	function copyadress()
+	{
+	var v=document.getElementById("webadress").value;
+	window.clipboardData.setData("text",v);
+	alert("链接已复制到剪切板");
+	}
+</script>
+ 
+ 
+ 
+ 
+ <style type="text/css">
+ body{
+ margin:0px;
+ width:100%;
+ height:100%;
+ }
+ #bg{
+   background:url(images/main2.jpg) center no-repeat;
+   width:100%;
+   height:100%;
+   /* position:absolute;
+   filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/main.jpg',sizingMethod='scale');  */
+ }
+ #logo{
+  width:100%;
+  padding-top:200px;
+  padding-left:400px;
+ }
+ #logo-img{
+ float:left;
+ }
+ #logo-text{
+ float:left;
+ padding:25px 25px 25PX 30PX;
+
+ }
+ #bottom{
+ padding-top:0px;
+ text-align:center;
+ }
+ </style> 
+</head>
+<body>
+
+
+<div id="bg">
+   <div id="logo" >
+        <div id="logo-img">
+          <img src="images/360explorelogo.jpg" width="100px" height="100px" />
+        </div>
+        <div id="logo-text">
+          <h1> 请使用360浏览器极速模式访问下方网址</h1>
+        </div>
+   </div>
+   <div id="bottom" >
+   <input id="webadress" value="http://localhost:8890/huiermall" type="text" style="width:400px;height:30px;font-size:25px;"></input> &nbsp &nbsp 
+    <button id="copybutton" onclick="copyadress()" type="button" style="width:50px;height:30px">复制</button>
+   </div>
+   
+</div> 
+    
+</body>
+</html>

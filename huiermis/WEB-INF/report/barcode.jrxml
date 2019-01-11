@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="barcode" pageWidth="187" pageHeight="120" columnWidth="187" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ecc0479c-b856-4708-91c4-ddf9432b802b">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="3.0052592036063115"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<parameter name="tmkfno" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select (case when p.pdtcls in ('CIC','ITC') then '数字耳内式助听器'
+when p.pdtcls in ('HS','ITE') then '数字耳内式助听器'
+else  '其他' end) as pname, m.tmkplr,substr(m.tmksid,0,6) as tmksid,nvl(f.folexdt, f.foldt ) as foldt,g.gctnm,c.ictnm,p.pdtcls,p.pdtnm from tblmaking m left outer join tblfolio f on f.folno=m.tmkfno left outer join tblproduct p on p.pdtid=m.tmkpid left outer join tblindclient c on c.ictid=m.tmkcltid left outer join tblgrpclient g on g.gctid=f.folctid where m.tmkfno=$P{tmkfno}]]>
+	</queryString>
+	<field name="PNAME" class="java.lang.String"/>
+	<field name="TMKPLR" class="java.lang.String"/>
+	<field name="TMKSID" class="java.lang.String"/>
+	<field name="FOLDT" class="java.sql.Timestamp"/>
+	<field name="GCTNM" class="java.lang.String"/>
+	<field name="ICTNM" class="java.lang.String"/>
+	<field name="PDTCLS" class="java.lang.String"/>
+	<field name="PDTNM" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Prevent"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="116" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="971843b3-8186-4b49-9f47-994556f523b4" key="textField-1" x="5" y="31" width="80" height="22"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GCTNM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="35afd0a4-9137-44a5-a428-34327040f712" key="textField-2" x="81" y="31" width="40" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ICTNM}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy/MM/dd" isBlankWhenNull="false">
+				<reportElement uuid="55a9436b-67d8-4047-ad78-74a406797c7e" key="textField-3" x="118" y="31" width="65" height="22"/>
+				<box>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FOLDT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="0cf91a6e-0ac4-486f-8f70-c2beddfb94b2" key="textField-4" x="6" y="53" width="15" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TMKPLR}.equals("0")?"左":"右"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="338cb6d6-ae5b-403f-86e2-aa539a6eed76" key="textField-6" x="25" y="53" width="160" height="20"/>
+				<textElement verticalAlignment="Top">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PDTNM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="75a11f17-ec03-4790-b546-159e01838eaa" key="textField-7" x="55" y="93" width="58" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TMKSID}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement uuid="9b6ab87e-8e3b-403a-a45d-ef211e7a29e2" x="5" y="76" width="174" height="16"/>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="3of9" drawText="false" checksumRequired="false" barWidth="2" barHeight="19">
+					<jr:codeExpression><![CDATA[$F{TMKSID}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="6e3cad54-9b05-4052-902e-d8bb46e7806a" key="textField-1" x="37" y="8" width="113" height="18"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PNAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

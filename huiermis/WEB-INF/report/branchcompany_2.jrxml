@@ -1,0 +1,1467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="companyfee_4" pageWidth="3500" pageHeight="1684" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="2380" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="3357fbff-4087-4cbc-af17-3a975d74e716">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="pdf8" fontName="宋体" fontSize="10" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+	<style name="pdf10" fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+	<parameter name="ccyear" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="startMonth" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endYear" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endMonth" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="iyear" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="gctarea" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT r.* FROM TBLBRANCHFINANCIALREPORT r WHERE
+TO_DATE (TO_CHAR (r.IYEAR, '9999') || TO_CHAR (r.imonth, '99'),'yyyy-mm') >= TO_DATE (TO_CHAR ($P{ccyear},'9999') || TO_CHAR ($P{startMonth}, '99'),'yyyy-mm')
+AND TO_DATE (TO_CHAR (r.iyear, '9999') || TO_CHAR (r.imonth, '99'),'yyyy-mm') <= TO_DATE (TO_CHAR ($P{endYear}, '9999') || TO_CHAR ($P{endMonth}, '99'),'yyyy-mm') AND r.gctarea=$P{gctarea} ORDER BY r.gctid,r.iyear,r.imonth]]>
+	</queryString>
+	<field name="IYEAR" class="java.lang.Integer"/>
+	<field name="IMONTH" class="java.lang.Integer"/>
+	<field name="GCTNAME" class="java.lang.String"/>
+	<field name="TOTALRETURNS" class="java.lang.Double"/>
+	<field name="INVOICEAMOUNT" class="java.lang.Double"/>
+	<field name="INVOICERATE" class="java.lang.Double"/>
+	<field name="PREMONEYFUNDS" class="java.lang.Double"/>
+	<field name="PURCHASECOSTS" class="java.lang.Double"/>
+	<field name="ACTUALPURCHASECOSTS" class="java.lang.Double"/>
+	<field name="MONTHCOSTS" class="java.lang.Double"/>
+	<field name="WAGESRETURN" class="java.lang.Double"/>
+	<field name="ELSECOSTS" class="java.lang.Double"/>
+	<field name="MONEYFUNDS" class="java.lang.Double"/>
+	<field name="PREACCOUNTPAYABLE" class="java.lang.Double"/>
+	<field name="ACCOUNTPAYABLE" class="java.lang.Double"/>
+	<field name="INVENTORY" class="java.lang.Double"/>
+	<field name="PAIDINCAPITAL" class="java.lang.Double"/>
+	<field name="ELSEACCOUNTPAYABLE" class="java.lang.Double"/>
+	<field name="WAGESPAYABLE" class="java.lang.Double"/>
+	<field name="ELSERECEIVABLES" class="java.lang.Double"/>
+	<field name="PREYEARUNDISPROFITS" class="java.lang.Double"/>
+	<field name="PREACCUPROFIT" class="java.lang.Double"/>
+	<field name="MONTHPROFIT" class="java.lang.Double"/>
+	<field name="YEARPROFIT" class="java.lang.Double"/>
+	<field name="ACCUUNDISPROFITS" class="java.lang.Double"/>
+	<field name="PREACCUINVOICEAMOUNT" class="java.lang.Double"/>
+	<field name="ACCUINVOICEAMOUNT" class="java.lang.Double"/>
+	<field name="PREACCUACTUALSALES" class="java.lang.Double"/>
+	<field name="ACCUACTUALSALES" class="java.lang.Double"/>
+	<field name="PREACCUCOSTOFSALES" class="java.lang.Double"/>
+	<field name="ACCUCOSTOFSALES" class="java.lang.Double"/>
+	<field name="OPERATINGANDMANAGEMENTCOSTS" class="java.lang.Double"/>
+	<field name="TAXANDACCOIATECHARGE" class="java.lang.Double"/>
+	<field name="FINANCINGCOSTS" class="java.lang.Double"/>
+	<field name="GCTAREA" class="java.lang.String"/>
+	<field name="PROFITRATE" class="java.lang.Double"/>
+	<field name="TAX" class="java.lang.Double"/>
+	<field name="GCTID" class="java.lang.String"/>
+	<field name="ACCUINVOICERATE" class="java.lang.Double"/>
+	<field name="ACCUYEARINVOICEAMOUNT" class="java.lang.String"/>
+	<field name="ACCOUNTRECIEVABLE" class="java.lang.Double"/>
+	<field name="MONTHTAX" class="java.lang.Double"/>
+	<variable name="sum1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTALRETURNS}]]></variableExpression>
+	</variable>
+	<variable name="sum2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{INVOICEAMOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumPremoneyfunds" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{PREMONEYFUNDS}]]></variableExpression>
+	</variable>
+	<variable name="sum4" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PURCHASECOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum5" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACTUALPURCHASECOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum6" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONTHCOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum7" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{WAGESRETURN}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum8" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ELSECOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum9" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONEYFUNDS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum10" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCOUNTPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum11" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCOUNTPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum12" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{INVENTORY}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum13" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PAIDINCAPITAL}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum14" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ELSEACCOUNTPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum15" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{WAGESPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum16" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ELSERECEIVABLES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum17" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREYEARUNDISPROFITS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum18" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUPROFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum19" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONTHPROFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum20" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{YEARPROFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum21" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUUNDISPROFITS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum22" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUINVOICEAMOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum23" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUINVOICEAMOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum24" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUACTUALSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum25" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUACTUALSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum26" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUCOSTOFSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum27" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUCOSTOFSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum28" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{OPERATINGANDMANAGEMENTCOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum29" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{TAXANDACCOIATECHARGE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum30" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FINANCINGCOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sum31" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{TAX}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTALRETURNS}]]></variableExpression>
+	</variable>
+	<variable name="variable2" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{INVOICEAMOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable3" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREMONEYFUNDS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable4" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PURCHASECOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable5" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACTUALPURCHASECOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="ssumMonthcosts" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[$F{MONTHCOSTS}]]></variableExpression>
+	</variable>
+	<variable name="variable7" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{WAGESRETURN}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable8" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ELSECOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable9" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONEYFUNDS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable10" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCOUNTPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable11" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCOUNTPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable12" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{INVENTORY}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable13" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PAIDINCAPITAL}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable14" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ELSEACCOUNTPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable15" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{WAGESPAYABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable16" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ELSERECEIVABLES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable17" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREYEARUNDISPROFITS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable18" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUPROFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable19" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONTHPROFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable20" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{YEARPROFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable21" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUUNDISPROFITS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable22" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUINVOICEAMOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable23" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUINVOICEAMOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable24" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUACTUALSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable25" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUACTUALSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable26" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{PREACCUCOSTOFSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable27" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCUCOSTOFSALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable28" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{OPERATINGANDMANAGEMENTCOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable29" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{TAXANDACCOIATECHARGE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable30" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FINANCINGCOSTS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="variable31" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{TAX}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="ssumACCOUNTRECIEVABLE" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCOUNTRECIEVABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumACCOUNTRECIEVABLE" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{ACCOUNTRECIEVABLE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="ssumMonthtax" class="java.lang.Double" resetType="Group" resetGroup="branchReport" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONTHTAX}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumMonthtax" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{MONTHTAX}.doubleValue())]]></variableExpression>
+	</variable>
+	<group name="branchReport">
+		<groupExpression><![CDATA[$F{GCTID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<staticText>
+					<reportElement uuid="cf608903-12fd-42d6-a772-41c2b6de77ba" key="staticText-6" style="pdf8" mode="Transparent" x="189" y="20" width="30" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[月份]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="88a7673b-20fd-4156-93da-4f960723fe21" key="staticText-8" style="pdf8" mode="Transparent" x="299" y="20" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[开票额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8eb9da14-ebe7-4dcc-b045-5ea3e1ad5012" key="staticText-35" style="pdf10" mode="Transparent" x="91" y="20" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[区域]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c63d4362-4613-4d1b-997a-324970fb96a6" key="staticText-44" style="pdf10" mode="Transparent" x="153" y="20" width="36" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[年份]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="334e8674-191e-4c35-aeb9-5e58507be755" key="staticText-6" style="pdf8" mode="Transparent" x="219" y="20" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[总销售额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f64c6fea-be93-49a4-8c25-cbbdf641eacc" key="staticText-6" style="pdf8" x="2" y="20" width="89" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[客户名称]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0c05ee24-1fb5-4471-8d52-ccfd187aa06d" key="staticText-16" mode="Transparent" x="1038" y="20" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月货币资金]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2a9857e7-5b6c-45dc-8e98-23fc3b5594b0" key="staticText-16" mode="Transparent" x="1124" y="20" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上月应付帐款]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1b0984f1-c9df-4a99-946d-fed52358007f" key="staticText-16" mode="Transparent" x="1207" y="20" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月应付账款]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="00fb87e9-7739-4a98-a8b9-9bdcce7d922c" mode="Transparent" x="369" y="20" width="50" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[比例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2cf1f0fb-abcb-4028-8d98-3c5351289c1d" mode="Transparent" x="605" y="20" width="71" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月进货款]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b3075686-9745-42ac-ac3a-ffa22df7a0c6" mode="Transparent" x="676" y="20" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[实付货款]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d1044532-333a-4abb-a698-13fa9ac5d761" mode="Transparent" x="742" y="20" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月费用]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="51ea582f-172c-4ef3-b7d8-946ad2cb7444" mode="Transparent" x="533" y="20" width="72" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上月资金]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0af6ad67-9db0-4e35-8e9d-2342b11e0504" mode="Transparent" x="911" y="20" width="78" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[工资打回]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="012b51dd-1a53-4e7d-95d1-77f7594ee28e" mode="Transparent" x="989" y="20" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[其他]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="57d05da0-0985-438b-b73c-3b90e0eac48e" key="staticText-16" mode="Transparent" x="1290" y="20" width="57" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[存货]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="dbed8e9b-afa1-4183-bd8e-a1c2f3ec578c" key="staticText-16" mode="Transparent" x="1347" y="20" width="71" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[实收资本]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f01cc732-80c0-483d-9a1a-5ca620467611" key="staticText-16" mode="Transparent" x="1655" y="20" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[其他应付款项]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c3ea26d6-e080-4852-ac41-53237b251f3f" key="staticText-16" mode="Transparent" x="1512" y="20" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[应付工资]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3dd50956-1e38-4a25-8aae-a1c86da3bba2" key="staticText-16" mode="Transparent" x="1578" y="20" width="77" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[其他应收账款]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="24c0cf00-0263-4028-8610-3023b0af0351" key="staticText-16" mode="Transparent" x="1741" y="20" width="123" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上年累计未分配利润]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1f5dd66b-767d-4df9-9c3e-55edf126c574" key="staticText-16" mode="Transparent" x="1864" y="20" width="107" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上月累计利润]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d65d2618-cc40-4206-b18d-d09cb01642dc" key="staticText-16" mode="Transparent" x="1971" y="20" width="88" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月利润]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="3d3d0f30-f6a2-4ee4-9909-2bc866bf6a23" key="staticText-16" mode="Transparent" x="2059" y="20" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本年利润]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ea14d756-ae68-405d-883d-0f338a99b8cc" key="staticText-16" mode="Transparent" x="2159" y="20" width="103" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[累计未分配利润]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="44db36be-8104-4871-b82a-086fc13e0cfe" key="staticText-16" mode="Transparent" x="2262" y="20" width="125" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上月累计开票销售额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8e6e596f-1082-4b4e-8a68-f9353fd01912" key="staticText-16" mode="Transparent" x="2387" y="20" width="124" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[累计开票销售额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="206dea22-05cb-4091-8636-ee5e9985c4d3" key="staticText-16" mode="Transparent" x="2511" y="20" width="131" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上月累计实际销售额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="dd4a55ef-b910-49b1-94e2-b5eacfedd5f3" key="staticText-16" mode="Transparent" x="2642" y="20" width="110" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[累计实际销售额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8c2f14c8-ecbd-4cfa-a43f-613f3444d194" key="staticText-16" mode="Transparent" x="2752" y="20" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[累计开票量]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6a706f70-353e-4391-acdd-22832ad5fef7" key="staticText-16" mode="Transparent" x="2835" y="20" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[上月累计主营业务成本]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="646f1586-8381-4b93-b288-8ad586649569" key="staticText-16" mode="Transparent" x="2973" y="20" width="153" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[累计主营业务成本]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f93fcaf7-1d16-4d41-ba19-dba3a5d0d719" key="staticText-16" mode="Transparent" x="3126" y="20" width="46" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[利润率]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="baa61224-9d33-4e3a-9133-f11748fd75ab" key="staticText-16" mode="Transparent" x="3172" y="20" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[所得税]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c915e385-23ad-4c03-be18-38ddecaf98ac" key="staticText-6" style="pdf8" mode="Transparent" x="419" y="20" width="114" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[累计十二个月开票额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2b067216-accd-4b2f-aa8e-755d92444e76" key="staticText-16" mode="Transparent" x="1418" y="20" width="94" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月应收款项]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f67e563a-a855-442b-83d3-51b081d7393b" mode="Transparent" x="822" y="20" width="89" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[本月税金]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50" splitType="Stretch">
+				<staticText>
+					<reportElement uuid="b433e2b4-7c68-4c02-a3e4-06e20715b029" key="staticText-45" style="pdf10" mode="Transparent" x="153" y="13" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[小计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="dcfe0712-1ded-4eee-a643-5e0eb0bec9d9" key="staticText-6" style="pdf8" mode="Transparent" x="369" y="13" width="50" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="56765bdf-e584-437f-90d7-48d33d096019" key="staticText-6" style="pdf8" mode="Transparent" x="419" y="13" width="114" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1e8eeedb-7614-4941-beb8-7ffc67933fef" key="staticText-6" style="pdf8" mode="Transparent" x="2752" y="13" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="eb9f9c86-fd88-4c12-9d90-119d5bfbc110" key="staticText-6" style="pdf8" mode="Transparent" x="3126" y="13" width="46" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+						<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+						<paragraph lineSpacing="Single"/>
+					</textElement>
+					<text><![CDATA[]]></text>
+				</staticText>
+				<textField>
+					<reportElement uuid="63625737-3f98-423b-a5ba-23ce3cb8ade1" x="533" y="13" width="72" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="6377da47-47b2-449c-bc45-e85747a1d554" x="605" y="13" width="71" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable4}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b4543d98-7c09-4ccc-aa47-27277c829fde" x="219" y="13" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="260dc794-95e4-4bea-974b-bc236c35acde" x="299" y="13" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="97ff0f0d-e50c-46f1-ba66-820ce4bb8b4d" x="676" y="13" width="66" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable5}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="558fadc5-1346-4b14-8cd5-d49a3f0316e7" x="911" y="13" width="77" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable7}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b4cc4531-a2a1-4e39-89f7-06c288109d87" x="988" y="13" width="50" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable8}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="99e23abf-c353-4734-8e91-524df9d1014f" x="1038" y="13" width="86" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable9}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7fff9fe5-c55f-40a8-aeb0-2681cb3d107b" x="1124" y="13" width="83" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable10}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="23b11d57-b98a-4544-84df-52bf8352e2a8" x="1207" y="13" width="83" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable11}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="3b195f76-0899-4d10-a9f4-5069b3a755e7" x="1290" y="13" width="57" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable12}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="eef5f41e-34ab-4f54-9660-4758d9e3b750" x="1347" y="13" width="71" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable13}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ca75e1c8-ea07-455a-97b1-ecec6bf46349" x="1655" y="13" width="86" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable14}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="44d5e584-bd63-4427-9525-f69ccd46ab64" x="1512" y="13" width="66" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable15}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="8b2bd4a5-edc6-4f55-881c-fd55ea6bbe1c" x="1578" y="13" width="77" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable16}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="54b9a970-8213-40a7-9e1f-9b39da18bbd5" x="1741" y="13" width="123" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable17}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="6d3f33e2-86c8-4ee6-94db-b9e864187216" x="1864" y="13" width="107" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable18}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="9200619b-9b37-4c0e-b0e8-a3e9a5849095" x="1971" y="13" width="88" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable19}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7d34677b-b449-4172-818f-75021f9887ba" x="2059" y="13" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable20}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="c9f0750c-c485-4960-b73f-f6b72bee856c" x="2159" y="13" width="103" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable21}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="7e8cb0fd-6810-454a-a9ba-d6c27e23a572" x="2262" y="13" width="125" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable22}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="81efff3b-4c0c-4802-b473-3297a4eea6d7" x="2387" y="13" width="124" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable23}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="40c88ecb-8b1d-4e70-80c8-24f0b233cf32" x="2511" y="13" width="131" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable24}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="97019ea5-85be-4402-b4d1-30b7a6860b61" x="2642" y="13" width="110" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable25}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="c40ff46f-f941-4db1-8e26-96350951694d" x="2835" y="13" width="138" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable26}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="09aa6686-b1b5-426f-968d-8ea899bbb8ce" x="2973" y="13" width="153" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable27}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="2f5e5a9b-95e6-4208-a422-e8c5386fb6ab" x="3172" y="13" width="66" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{variable31}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="58c76c08-f974-4aa0-8f49-69c1e13f18ca" x="742" y="13" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ssumMonthcosts}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="a0e987c3-15ee-4a20-b2e2-01051f66b8f6" x="1418" y="13" width="94" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ssumACCOUNTRECIEVABLE}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4648c0f8-b60d-4cb6-a761-c63c9a20ae26" x="822" y="13" width="89" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{ssumMonthtax}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5de694de-f620-4a70-8cc1-d5d068319213" key="staticText-1" x="2" y="0" width="1396" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[分公司情况表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="cafb2b73-c0c1-4ebf-bbdb-ae5dd86cbfb3" key="staticText-6" style="pdf8" x="2" y="3" width="89" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e6dcb868-6799-4e8e-b34d-82a61fec5d21" key="staticText-6" style="pdf8" mode="Transparent" x="91" y="3" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="318a592f-9eee-456c-a1b6-d37ec55b074f" key="staticText-6" style="pdf8" mode="Transparent" x="153" y="3" width="36" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="413aa8c8-5fd3-4b23-89f5-eed84c611446" key="staticText-6" style="pdf8" mode="Transparent" x="189" y="3" width="30" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="f6821134-0a27-43d0-8309-b6faa5e0a622" key="staticText-6" style="pdf8" mode="Transparent" x="219" y="3" width="314" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[本月开票情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="10c3a601-5bb7-433c-b71d-12ecea1ae0ad" key="staticText-6" style="pdf8" mode="Transparent" x="533" y="3" width="591" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[本月货币资金情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="119057d5-256d-49bb-8a99-3c1c2a108d7d" key="staticText-6" style="pdf8" mode="Transparent" x="1124" y="3" width="617" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[应付、应收款情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="74be923d-72d9-4bd8-8cbc-1b10fa7019c7" key="staticText-6" style="pdf8" mode="Transparent" x="1741" y="3" width="1497" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="12" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[利润情况]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="6f64d11a-08f7-4902-9a3a-8eae3ece2664" key="textField-11" style="pdf10" mode="Transparent" x="189" y="0" width="30" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IMONTH}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="bcc3087a-c64e-4787-b916-b39016fdeb6b" key="textField-13" style="pdf10" mode="Transparent" x="299" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INVOICEAMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="d7c8694e-2f8b-4c58-ad1c-a6a28cdff89a" key="textField-15" style="pdf10" mode="Transparent" x="1578" y="0" width="77" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ELSERECEIVABLES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="618cef23-aa6b-4302-98bc-d25c68a0de57" key="textField-59" style="pdf10" mode="Transparent" x="1124" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREACCOUNTPAYABLE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="7ec26ce5-bf5f-4a33-a910-e3025bd5ff41" key="textField-11" style="pdf10" mode="Transparent" x="153" y="0" width="36" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IYEAR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="0acac4d4-9ce4-4e7b-bb82-57f371671894" key="textField-11" style="pdf10" mode="Transparent" x="219" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TOTALRETURNS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="dad3fa7e-edf7-4d07-aefa-dea90714a915" key="textField-13" style="pdf10" mode="Transparent" x="369" y="0" width="50" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INVOICERATE}+"%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="a4fb6bd1-062f-439d-aeb7-1efd1192707b" key="textField-59" style="pdf10" mode="Transparent" x="1207" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCOUNTPAYABLE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="1eef4a26-7560-4c9c-85bf-12f1d1d4f359" key="textField-59" style="pdf10" mode="Transparent" x="1290" y="0" width="57" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INVENTORY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="b65f6e17-4fa9-4004-a6f3-4bb54c447eb5" key="textField-59" style="pdf10" mode="Transparent" x="1347" y="0" width="71" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PAIDINCAPITAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="2824ceef-ab01-4e4f-b3d2-739f12347a20" key="textField-59" style="pdf10" mode="Transparent" x="1655" y="0" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ELSEACCOUNTPAYABLE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="623a5aa0-9653-4377-aad2-dc08c0434d6b" key="textField-59" style="pdf10" mode="Transparent" x="1512" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WAGESPAYABLE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="a474d81f-b6f6-4374-9c81-4ce5c1e98edb" key="textField-15" style="pdf10" mode="Transparent" x="1741" y="0" width="123" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREYEARUNDISPROFITS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="f0e0ac4c-14a6-4751-bf5d-694a159f8fdc" key="textField-15" style="pdf10" mode="Transparent" x="1864" y="0" width="107" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREACCUPROFIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="de35a163-9e8b-44ce-90f3-a55c9833995e" key="textField-15" style="pdf10" mode="Transparent" x="1971" y="0" width="88" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONTHPROFIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="90e61cfe-927b-48c0-951f-bbe81d364bd8" key="textField-15" style="pdf10" mode="Transparent" x="2059" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{YEARPROFIT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="84b2a3f5-3a81-4e75-bf3d-ce4375e2a805" key="textField-15" style="pdf10" mode="Transparent" x="2159" y="0" width="103" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCUUNDISPROFITS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="acb3e4d9-9cd6-4afd-ac05-1b8ae922f87e" key="textField-15" style="pdf10" mode="Transparent" x="2262" y="0" width="125" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREACCUINVOICEAMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="5a59c3af-66ef-41dc-8c25-7549e3961617" key="textField-15" style="pdf10" mode="Transparent" x="2387" y="0" width="124" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCUINVOICEAMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="9cf2606e-1960-45fe-81f2-2950426dbf5e" key="textField-15" style="pdf10" mode="Transparent" x="2511" y="0" width="131" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREACCUACTUALSALES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="9d95b51d-5822-4c77-90bc-05d4cc2b1c26" key="textField-15" style="pdf10" mode="Transparent" x="2752" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCUINVOICERATE}+"%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="fa797e99-10e1-4d68-8a1a-849776caa0ef" key="textField-15" style="pdf10" mode="Transparent" x="2835" y="0" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREACCUCOSTOFSALES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="8ea879fb-546e-4edf-9615-1f2cf6a6c64c" key="textField-15" style="pdf10" mode="Transparent" x="2973" y="0" width="153" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCUCOSTOFSALES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="a119d8c1-133f-4b99-a574-680a8587d6d1" key="textField-15" style="pdf10" mode="Transparent" x="3126" y="0" width="46" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROFITRATE}+"%"]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="6885b261-f0e7-45a3-912d-7c520c295fa9" key="textField-15" style="pdf10" mode="Transparent" x="3172" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TAX}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="81caaaad-efb1-48e0-8250-d42579078b19" key="textField-13" style="pdf10" mode="Transparent" x="533" y="0" width="72" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PREMONEYFUNDS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="7b1be508-24cf-470d-8ce9-57eef8ef6886" key="textField-13" style="pdf10" mode="Transparent" x="605" y="0" width="71" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PURCHASECOSTS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="59bc7323-130b-433f-ac37-0cc33c940163" key="textField-13" style="pdf10" mode="Transparent" x="676" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACTUALPURCHASECOSTS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="4173d207-5315-43e4-a2a1-bfad6b54b02b" key="textField-13" style="pdf10" mode="Transparent" x="911" y="0" width="78" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{WAGESRETURN}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="e6015cc0-75a7-4962-88ec-4726ec893aaa" key="textField-13" style="pdf10" mode="Transparent" x="989" y="0" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ELSECOSTS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="a4f01e6b-7abd-471e-85a3-d83924d8a010" key="textField-13" style="pdf10" mode="Transparent" x="1038" y="0" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONEYFUNDS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="00a29cfd-70c8-4cbd-bef1-f09c2d21156d" key="textField-13" style="pdf10" mode="Transparent" x="742" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONTHCOSTS}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="a0494f22-2445-455c-ad09-33727c7dce87" key="textField-62" style="pdf10" mode="Transparent" x="91" y="0" width="62" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GCTAREA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="dd0aabcc-c6fb-4567-aa0b-e151d46b89ef" key="textField-11" style="pdf10" x="2" y="0" width="89" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GCTNAME}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="996c445c-c87b-44d7-8243-b84062eb96b7" key="textField-15" style="pdf10" mode="Transparent" x="2642" y="0" width="110" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCUACTUALSALES}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="65a27e2d-8245-4c30-9d27-f6edcd09154b" key="textField-13" style="pdf10" mode="Transparent" x="419" y="0" width="114" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCUYEARINVOICEAMOUNT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="142f5e39-9cbc-4d80-b45e-6f75ba96106d" style="pdf10" mode="Transparent" x="1418" y="0" width="94" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ACCOUNTRECIEVABLE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="0bbefe0f-92c8-4b37-86d4-912dbceab4c2" key="textField-13" style="pdf10" mode="Transparent" x="822" y="0" width="89" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONTHTAX}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="b7ed78a8-333e-4792-b324-13386bc003b6" key="staticText-45" style="pdf10" x="153" y="0" width="66" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[总计]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="7b8122db-4158-4ae2-985e-e6f9e8a8873f" mode="Transparent" x="219" y="0" width="80" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1ef2149e-d697-4a4b-9c35-4eda8bdcd3a9" mode="Transparent" x="299" y="0" width="70" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="6335cdc6-30e0-429c-92a4-e4f25445f53a" key="staticText-6" style="pdf8" mode="Transparent" x="369" y="0" width="50" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="449d72c7-c90c-463b-91b8-8f078e98af30" mode="Transparent" x="605" y="0" width="71" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a2c6b03a-64a7-401f-9a08-0bed06fc18bb" mode="Transparent" x="676" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum5}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="225d9df3-0051-4c60-9269-411eb63324df" mode="Transparent" x="911" y="0" width="78" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum7}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7006fc44-4411-4eff-a867-74402cf88672" mode="Transparent" x="989" y="0" width="49" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum8}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b972e11a-bb2d-4b9e-a4bb-83f028af734b" mode="Transparent" x="1038" y="0" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum9}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="bf85ad63-0a31-4bfc-baa3-1631fb094c4a" mode="Transparent" x="1124" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum10}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e8d63002-7bc2-48e0-98a0-d498885bb166" mode="Transparent" x="1207" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum11}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5af4ccef-dc4e-4630-b02c-f029825debc2" mode="Transparent" x="1290" y="0" width="57" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum12}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8ade70a8-98a1-45c6-9344-0f91133f337b" mode="Transparent" x="1347" y="0" width="71" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum13}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b539c9ff-e582-457a-a039-02a76ea6b014" mode="Transparent" x="1655" y="0" width="86" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum14}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2fdbf59c-1ed0-44ff-8a26-d5347c631437" mode="Transparent" x="1512" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum15}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8eab6b81-a23e-42fc-befc-e986d8878712" mode="Transparent" x="1578" y="0" width="77" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum16}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b9584e43-51b1-4879-931f-a11abe03f82f" mode="Transparent" x="1741" y="0" width="123" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum17}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d998b5a7-f6a9-40c1-bf7a-5671343678ed" mode="Transparent" x="1864" y="0" width="107" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum18}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f51f2af9-4431-4f0f-9532-2e03a2bd733f" mode="Transparent" x="1971" y="0" width="88" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum19}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b7c9a1ca-3310-46a3-ae2f-e6fbfbe9c429" mode="Transparent" x="2059" y="0" width="100" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum20}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1652e548-9c5b-4f53-9622-7723cfb3a50c" mode="Transparent" x="2159" y="0" width="103" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum21}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="86aa6439-f8a6-49f1-8f82-da4605e20096" mode="Transparent" x="2262" y="0" width="125" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum22}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="22d61ea5-94cb-4cfe-8872-1d024efbbf99" mode="Transparent" x="2387" y="0" width="124" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum23}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5c904929-1e77-4779-8cc8-a31760036574" mode="Transparent" x="2511" y="0" width="131" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum24}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a14e4422-64f8-43e7-9232-92d07bf2129f" mode="Transparent" x="2642" y="0" width="110" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum25}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9c78bc09-ab4e-480a-9f58-85f164f4ca25" mode="Transparent" x="2835" y="0" width="138" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum26}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="74b37ae6-7f6d-4e07-a09f-7b9978224aa6" mode="Transparent" x="2973" y="0" width="153" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum27}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="e231de1f-084f-46ee-a473-97393768db3c" key="staticText-6" style="pdf8" mode="Transparent" x="2752" y="0" width="83" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="603b4508-b581-4da7-b1b9-2f7342b5ff59" key="staticText-6" style="pdf8" mode="Transparent" x="3126" y="0" width="46" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="e639af0b-fde6-434f-99bf-4838de8717f9" mode="Transparent" x="3172" y="0" width="66" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum31}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="d02a1b6b-9939-40e6-ae9b-04ceeeef0d7e" key="staticText-6" style="pdf8" mode="Transparent" x="419" y="0" width="114" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="044f6f64-0006-4679-bb61-3e797cea8b36" x="742" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sum6}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2ed1b3a7-421c-4d1c-b88a-5df4a2ddccf1" x="533" y="0" width="72" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumPremoneyfunds}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c1039cd8-51f0-4435-823a-a9ba9c112ed9" mode="Transparent" x="1418" y="0" width="94" height="20" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="宋体" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumACCOUNTRECIEVABLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="89b10f5a-bb58-45ab-adad-c8843d9302bb" x="822" y="0" width="89" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="宋体" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumMonthtax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="58" splitType="Stretch"/>
+	</summary>
+</jasperReport>

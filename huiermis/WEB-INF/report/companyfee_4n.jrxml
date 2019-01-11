@@ -1,0 +1,1094 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="companyfee_4" pageWidth="2380" pageHeight="1684" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="2380" leftMargin="0" rightMargin="0" topMargin="20" bottomMargin="20" uuid="91247493-a2ac-4aa8-bc10-b738fae7d5a9">
+	<property name="ireport.scriptlethandling" value="0"/>
+	<property name="ireport.encoding" value="UTF-8"/>
+	<property name="ireport.zoom" value="1.9487171000000127"/>
+	<property name="ireport.x" value="3719"/>
+	<property name="ireport.y" value="0"/>
+	<import value="net.sf.jasperreports.engine.*"/>
+	<import value="java.util.*"/>
+	<import value="net.sf.jasperreports.engine.data.*"/>
+	<style name="pdf8" fontName="宋体" fontSize="10" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+	<style name="pdf10" fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+	<parameter name="ccyear" class="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="startMonth" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endYear" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="endMonth" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="feeyear" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select f.*,g.gctnm,d.aaa103,g.gctarea from tblfee f left outer join tblgrpclient g on g.gctid=f.feegctid left outer join aa10 d on (d.aaa100='GCTPROVINCE' and d.aaa102=g.gctprovince) where to_date(to_char(f.feeyear,'9999')||to_char(f.feemonth,'99'),'yyyy-mm')>=to_date(to_char($P{ccyear},'9999')||to_char($P{startMonth},'99'),'yyyy-mm') and to_date(to_char(f.feeyear,'9999')||to_char(f.feemonth,'99'),'yyyy-mm')<=to_date(to_char($P{endYear},'9999')||to_char($P{endMonth},'99'),'yyyy-mm') order by f.feegctid,f.feeyear,f.feemonth]]>
+	</queryString>
+	<field name="FEEYEAR" class="java.math.BigDecimal"/>
+	<field name="FEEMONTH" class="java.math.BigDecimal"/>
+	<field name="FEEGCTID" class="java.lang.String"/>
+	<field name="FEERENT" class="java.math.BigDecimal"/>
+	<field name="FEETAX" class="java.math.BigDecimal"/>
+	<field name="FEEPENSION" class="java.math.BigDecimal"/>
+	<field name="FEEASSETS" class="java.math.BigDecimal"/>
+	<field name="FEEPAY" class="java.math.BigDecimal"/>
+	<field name="FEEBUILT" class="java.math.BigDecimal"/>
+	<field name="FEEOPEN" class="java.math.BigDecimal"/>
+	<field name="FEOTHERSA" class="java.math.BigDecimal"/>
+	<field name="FEEAD" class="java.math.BigDecimal"/>
+	<field name="FEEPHONE" class="java.math.BigDecimal"/>
+	<field name="FEEWATER" class="java.math.BigDecimal"/>
+	<field name="FEETRIP" class="java.math.BigDecimal"/>
+	<field name="FEEPOSTAGE" class="java.math.BigDecimal"/>
+	<field name="FEEOFFICE" class="java.math.BigDecimal"/>
+	<field name="FEESOCIAL" class="java.math.BigDecimal"/>
+	<field name="FEEBENEFIT" class="java.math.BigDecimal"/>
+	<field name="FEEACCOUNT" class="java.math.BigDecimal"/>
+	<field name="FEEOP" class="java.lang.String"/>
+	<field name="FEEOPDATA" class="java.sql.Timestamp"/>
+	<field name="FEEOTHERSB" class="java.math.BigDecimal"/>
+	<field name="FEESALES" class="java.math.BigDecimal"/>
+	<field name="FEEDEVICE" class="java.math.BigDecimal"/>
+	<field name="FEEMANAGE" class="java.math.BigDecimal"/>
+	<field name="FEEINVOICE" class="java.math.BigDecimal"/>
+	<field name="FEETRANS" class="java.math.BigDecimal"/>
+	<field name="FEEPROCESS" class="java.math.BigDecimal"/>
+	<field name="FEENT" class="java.math.BigDecimal"/>
+	<field name="FEEPROMOTION" class="java.math.BigDecimal"/>
+	<field name="FEEBACK" class="java.math.BigDecimal"/>
+	<field name="GCTNM" class="java.lang.String"/>
+	<field name="AAA103" class="java.lang.String"/>
+	<field name="GCTAREA" class="java.lang.String"/>
+	<variable name="sumfee" class="java.lang.Double" resetType="None">
+		<variableExpression><![CDATA[new Double($F{FEEAD}.doubleValue()+$F{FEEPHONE}.doubleValue()+$F{FEEWATER}.doubleValue()+$F{FEETRIP}.doubleValue()+$F{FEEPOSTAGE}.doubleValue()+$F{FEEOFFICE}.doubleValue()+$F{FEESOCIAL}.doubleValue()+$F{FEEACCOUNT}.doubleValue()+$F{FEEOTHERSB}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumout" class="java.lang.Double">
+		<variableExpression><![CDATA[new Double($F{FEERENT}.doubleValue()+$F{FEETAX}.doubleValue()+$F{FEEPENSION}.doubleValue()+$F{FEEASSETS}.doubleValue()+$F{FEEPAY}.doubleValue()+$F{FEEBUILT}.doubleValue()+$F{FEEOPEN}.doubleValue()+$F{FEOTHERSA}.doubleValue()+$F{FEEAD}.doubleValue()+$F{FEEPHONE}.doubleValue()+$F{FEEWATER}.doubleValue()+$F{FEETRIP}.doubleValue()+$F{FEEPOSTAGE}.doubleValue()+$F{FEEOFFICE}.doubleValue()+$F{FEESOCIAL}.doubleValue()+$F{FEEBENEFIT}.doubleValue()+$F{FEEACCOUNT}.doubleValue()+$F{FEOTHERSA}.doubleValue()+$F{FEEINVOICE}.doubleValue()+$F{FEETRANS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumfz" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEERENT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumss" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEETAX}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumyl" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEPENSION}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumgd" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEASSETS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumgz" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEPAY}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumzx" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEBUILT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumkb" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEOPEN}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumqt" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEINVOICE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumgg" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEAD}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumsd" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEWATER}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumdh" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEPHONE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumcl" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEETRIP}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumyf" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEPOSTAGE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumbg" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEOFFICE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumgongg" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEESOCIAL}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumzz" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEBENEFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumkj" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEACCOUNT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumfy" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{sumfee}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sunzc" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{sumout}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumxs" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEESALES}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumwqt" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEOTHERSA}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumsb" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEDEVICE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumgl" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEMANAGE}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="ssfz" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_rent}]]></variableExpression>
+	</variable>
+	<variable name="ssss" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumss}]]></variableExpression>
+	</variable>
+	<variable name="ssyl" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumyl}]]></variableExpression>
+	</variable>
+	<variable name="ssgz" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumgz}]]></variableExpression>
+	</variable>
+	<variable name="sszx" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_built}]]></variableExpression>
+	</variable>
+	<variable name="sskb" class="java.math.BigDecimal" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_open}]]></variableExpression>
+	</variable>
+	<variable name="ssqt" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumqt}]]></variableExpression>
+	</variable>
+	<variable name="ssgg" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumgg}]]></variableExpression>
+	</variable>
+	<variable name="sssd" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumsd}]]></variableExpression>
+	</variable>
+	<variable name="ssdh" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumdh}]]></variableExpression>
+	</variable>
+	<variable name="sscl" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumcl}]]></variableExpression>
+	</variable>
+	<variable name="ssyf" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumyf}]]></variableExpression>
+	</variable>
+	<variable name="ssbg" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumbg}]]></variableExpression>
+	</variable>
+	<variable name="ssgongg" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumgongg}]]></variableExpression>
+	</variable>
+	<variable name="sszz" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumzz}]]></variableExpression>
+	</variable>
+	<variable name="sskj" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumkj}]]></variableExpression>
+	</variable>
+	<variable name="ssfy" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumfy}]]></variableExpression>
+	</variable>
+	<variable name="sszc" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sunzc}]]></variableExpression>
+	</variable>
+	<variable name="ssxs" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumxs}]]></variableExpression>
+	</variable>
+	<variable name="sswqt" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumwqt}]]></variableExpression>
+	</variable>
+	<variable name="sssb" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumsb}]]></variableExpression>
+	</variable>
+	<variable name="ssgl" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumgl}]]></variableExpression>
+	</variable>
+	<variable name="ssgd" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumgd}]]></variableExpression>
+	</variable>
+	<variable name="sumzrf" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEETRANS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sszrf" class="java.math.BigDecimal" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_trans}]]></variableExpression>
+	</variable>
+	<variable name="sum_rent" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_built" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_open" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_trans" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_assetscom" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_assetscon" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_assetsmach" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sum_other" class="java.math.BigDecimal" resetType="Group" resetGroup="fee" incrementType="Report">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="sscom" class="java.math.BigDecimal" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_assetscom}]]></variableExpression>
+	</variable>
+	<variable name="sscon" class="java.math.BigDecimal" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_assetscon}]]></variableExpression>
+	</variable>
+	<variable name="ssmach" class="java.math.BigDecimal" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_assetsmach}]]></variableExpression>
+	</variable>
+	<variable name="ssothers" class="java.math.BigDecimal" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{ssothers}]]></variableExpression>
+	</variable>
+	<variable name="column" class="java.lang.Integer" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[1]]></variableExpression>
+		<initialValueExpression><![CDATA[2]]></initialValueExpression>
+	</variable>
+	<variable name="sum_column" class="java.lang.Integer" resetType="None">
+		<variableExpression><![CDATA[$V{column}+2]]></variableExpression>
+	</variable>
+	<variable name="seq" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{REPORT_COUNT}+2]]></variableExpression>
+	</variable>
+	<variable name="group_count" class="java.lang.Integer" incrementType="Group" incrementGroup="fee" calculation="Count">
+		<variableExpression><![CDATA[1]]></variableExpression>
+	</variable>
+	<variable name="group_count_2" class="java.lang.Integer">
+		<variableExpression><![CDATA[2*($V{group_count}-1)+$V{seq}]]></variableExpression>
+	</variable>
+	<variable name="group_count_3" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{group_count_2}+1]]></variableExpression>
+	</variable>
+	<variable name="group_count_4" class="java.lang.Integer">
+		<variableExpression><![CDATA[$V{group_count_3}+1]]></variableExpression>
+	</variable>
+	<variable name="ssscom" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sum_assetscom}]]></variableExpression>
+	</variable>
+	<variable name="sumcx" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEPROMOTION}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sumsx" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEPROCESS}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sssx" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumsx}]]></variableExpression>
+	</variable>
+	<variable name="sscx" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumcx}]]></variableExpression>
+	</variable>
+	<variable name="sumtj" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEBACK}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="sstj" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumtj}]]></variableExpression>
+	</variable>
+	<variable name="sumyh" class="java.lang.Double" resetType="Group" resetGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[new Double($F{FEEBENEFIT}.doubleValue())]]></variableExpression>
+	</variable>
+	<variable name="ssyh" class="java.lang.Double" incrementType="Group" incrementGroup="fee" calculation="Sum">
+		<variableExpression><![CDATA[$V{sumyh}]]></variableExpression>
+	</variable>
+	<group name="fee">
+		<groupExpression><![CDATA[$F{FEEGCTID}]]></groupExpression>
+		<groupHeader>
+			<band height="50" splitType="Stretch">
+				<staticText>
+					<reportElement uuid="cfd0f461-a9d4-4887-b21e-b83d82e64a4b" key="staticText-6" style="pdf8" x="313" y="20" width="30" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[月份]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2b81eb8a-f5df-4196-a2d7-b9174b69a3af" key="staticText-8" style="pdf8" x="343" y="20" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[销售额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4976c039-2ca5-470b-8475-5b9b1274a597" key="staticText-12" style="pdf8" x="1090" y="20" width="50" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[税收]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="e586ae42-4f02-4cfb-92c3-8912e9971a71" key="staticText-15" style="pdf8" x="1396" y="20" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[工资]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f469d7e5-e1e7-4443-92de-394f976375e5" key="staticText-19" style="pdf8" x="1536" y="20" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[广告费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="66a08fed-64db-42ed-898d-a8b9f585882f" key="staticText-20" style="pdf8" x="1616" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[电话费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="112a9286-f0ef-4fdc-ae15-3e8eb1dc231a" key="staticText-21" style="pdf8" x="1676" y="20" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[水电费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="aa542b95-508e-449e-9732-5c72a336a941" key="staticText-22" style="pdf8" x="1746" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[差旅费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b5e734d8-7a63-44aa-9d29-eb6ae65d96b6" key="staticText-23" style="pdf8" x="1806" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[邮费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="55be4a81-95f2-400b-8554-b12c4f81f6cb" key="staticText-24" style="pdf8" x="1866" y="20" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[办公费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2afa2d0d-5138-4765-9040-d211ae6bf927" key="staticText-25" style="pdf8" x="1936" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[公关费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8f4400ee-1ae6-405a-acde-07ce647b0e6b" key="staticText-28" style="pdf8" x="1996" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[会计工资]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="29fbbc32-b387-49ca-b182-381d1816fc99" key="staticText-29" style="pdf8" x="1022" y="20" width="68" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[开票税]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8a27bbd8-fc5e-443b-9262-b173f0eaaccb" key="staticText-30" style="pdf8" x="2056" y="20" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[费用小计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="541b334d-1cc8-4737-9798-12f3900e863e" key="staticText-31" style="pdf8" x="2156" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[费用比例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="db77b85e-2db9-4356-be8c-4c935c36e1c5" key="staticText-32" style="pdf8" x="2216" y="20" width="100" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[支出合计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="155a62c8-dfcb-4d1a-ae39-0c9fd7e2f90f" key="staticText-35" style="pdf10" x="61" y="20" width="47" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[省份]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2508caec-555b-43d5-8043-23496f5f942f" key="staticText-39" style="pdf8" x="1140" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[社保费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="f07a989e-4d56-4b0c-bb59-deaadc8e0019" key="staticText-42" style="pdf8" x="1476" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="10" pdfFontName="Helvetica" pdfEncoding="UniGB-UCS2-H"/>
+					</textElement>
+					<text><![CDATA[其他]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7b6c6a0c-d9c5-4c02-bce2-90bd6bff488b" key="staticText-43" style="pdf8" x="969" y="20" width="53" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[管理费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="c3b67b61-90f7-42c6-be00-e833a4ca67a9" key="staticText-44" style="pdf10" x="108" y="20" width="74" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[客户代码]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="68d48d6e-5386-4f38-8adc-ad49ba2cbd40" key="staticText-6" style="pdf8" x="273" y="20" width="40" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[年份]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="35a6d94c-8105-46a6-ad8d-a45c5b89c29f" key="staticText-6" style="pdf8" x="182" y="20" width="91" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[客户名称]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7d58a158-a304-4733-bef1-cb79ad6d74bf" key="staticText-6" style="pdf8" x="2" y="20" width="59" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[区域]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6a2b0ba2-c2e4-4f88-b443-e263b46b0bdb" key="staticText-16" x="683" y="20" width="69" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[固定资产（电脑）]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="b8590316-a45f-4293-9c77-d8e8e34b982a" key="staticText-16" x="752" y="20" width="68" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[固定资产（空调）]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="2dd92732-f595-4d72-964d-233392ed836c" key="staticText-16" x="890" y="20" width="79" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[固定资产]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="68eb56a4-f938-4075-ac62-34304c22136a" key="staticText-16" x="820" y="20" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[设备]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="7fbc5e40-7e85-4ef9-95e2-1d2e5f7beccf" x="423" y="20" width="50" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" size="10"/>
+					</textElement>
+					<text><![CDATA[房租]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="63100551-284e-46ba-97a5-8877c91505a8" x="473" y="20" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" size="10"/>
+					</textElement>
+					<text><![CDATA[装修费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8b84a870-310c-42b0-ac6b-6ff8debb50e4" x="543" y="20" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" size="10"/>
+					</textElement>
+					<text><![CDATA[开办费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="fea4aa54-250e-4152-bdc9-40af3d0815d9" x="603" y="20" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" size="10"/>
+					</textElement>
+					<text><![CDATA[转让费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="cd7c9eb1-2cc4-41f0-92d8-450003a67daa" key="staticText-39" style="pdf8" x="1200" y="20" width="47" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[手续费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d3065243-8d9b-4104-8146-19874e107efc" key="staticText-39" style="pdf8" x="1247" y="20" width="48" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[促销]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8b85dcd9-e18c-47d8-b844-875d6345f17f" key="staticText-39" x="1350" y="20" width="46" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[退机费]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="32bb7c4f-6562-4881-b3e4-f2ba7be154ca" key="staticText-39" style="pdf8" x="1295" y="20" width="55" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<text><![CDATA[优惠]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="50" splitType="Stretch">
+				<staticText>
+					<reportElement uuid="57bc959b-ac13-48e6-966d-831bcdb40ee7" key="staticText-41" style="pdf10" x="313" y="0" width="30" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<text><![CDATA[小计]]></text>
+				</staticText>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="75ada74b-7c37-4af0-92a6-c7b366451453" key="textField-36" style="pdf10" x="1140" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumyl}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="fab0ffc9-e115-4c3c-909e-f0e83c3cd368" key="textField-38" style="pdf10" x="1396" y="0" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumgz}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="7af3c31c-a2ca-4d72-9cdd-24d3a607ce4a" key="textField-41" style="pdf10" x="1536" y="0" width="80" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumgg}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="a697e565-438c-4262-9a9b-671f2cc64a23" key="textField-42" style="pdf10" x="1022" y="0" width="68" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumqt}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="5da45b87-d6d1-44dd-86f2-aaf45c6bdf1c" key="textField-43" style="pdf10" x="1616" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumdh}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="00aca14b-29cb-41dc-9d5a-af4e7f9f7980" key="textField-44" style="pdf10" x="1676" y="0" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumsd}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="67376978-583c-4636-9a6d-fe138769c938" key="textField-45" style="pdf10" x="1746" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumcl}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="3af25d93-9091-46ba-909f-45fdafc58d77" key="textField-46" style="pdf10" x="1806" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumyf}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="35930a52-23de-4dcc-ae0d-0ee8bcb18496" key="textField-47" style="pdf10" x="1866" y="0" width="70" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumbg}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="629349ce-cb60-41d3-b419-836eae504583" key="textField-48" style="pdf10" x="1936" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumgongg}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="9dc36b65-ee50-4e69-9beb-9b506e6a3af4" key="textField-50" style="pdf10" x="1996" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumkj}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="db123719-3381-45c2-86e9-1fe86b701986" key="textField-51" style="pdf10" x="2056" y="0" width="100" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumfy}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="3fbafdcb-9a02-42c3-8df6-984704c0e1d1" key="textField-52" style="pdf10" x="2216" y="0" width="100" height="20">
+						<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["SUM(I"+$V{group_count_3}+":AH"+$V{group_count_3}+",-Q"+$V{group_count_3}+")"]]></propertyExpression>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="false">
+					<reportElement uuid="8bc53ded-b2a3-4d79-bc52-278b3883ce55" key="textField-54" style="pdf10" x="343" y="0" width="80" height="20" isPrintWhenDetailOverflows="true"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumxs}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="eff66d3c-bcaf-4c51-b3bd-11c9564819f7" key="textField-57" style="pdf10" x="1476" y="0" width="60" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumwqt}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="32d6df13-f374-4b6b-acbf-41ca8a7057a5" key="textField-61" style="pdf10" x="969" y="0" width="53" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$F{FEEMANAGE}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement uuid="e5eb8ee8-1c36-4820-8672-1413e2e551e8" x="890" y="0" width="79" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_other}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement uuid="75f60757-7f64-4e65-ae84-21ad86073241" x="603" y="0" width="80" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_trans}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement uuid="636b2e3f-dd7c-44fe-9c65-846dfed637ea" x="423" y="0" width="50" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_rent}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement uuid="fd9e582b-1409-4c3c-8c5a-6c50b281c28f" x="752" y="0" width="68" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_assetscon}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement uuid="f341796e-b486-4255-84d7-bf4072852f88" x="820" y="0" width="70" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_assetsmach}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="19c7078e-ef59-452a-a8ae-964959253cfe" key="textField-35" style="pdf10" x="1090" y="0" width="50" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumss}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="4ecac12e-b506-40a5-b0c0-3e20e566630b" x="473" y="0" width="70" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_built}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="5a73b800-17c9-47b8-9811-52ab8a59d09a" x="543" y="0" width="60" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_open}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement uuid="1c576680-c0ee-43a4-90c1-fd85d1685127" x="683" y="0" width="69" height="20"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$V{sum_assetscom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="a8468a6e-d2c2-4ca4-8f49-3ef0068f8baf" x="2156" y="0" width="60" height="20">
+						<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["ROUND(IF(H"+$V{group_count_3}+"=0,0,100*AI"+$V{group_count_3}+"/H"+$V{group_count_3}+"),2)"]]></propertyExpression>
+					</reportElement>
+					<textElement/>
+					<textFieldExpression><![CDATA[]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="d105537a-a68b-463c-87f5-a3e1a187af4a" key="textField-36" x="1200" y="0" width="47" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumsx}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="34e3d45d-70d6-4dfd-8537-2410125f7176" key="textField-36" x="1247" y="0" width="48" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumcx}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="cd25e549-064d-4fd6-a213-7e5d2801ce32" key="textField-36" x="1350" y="0" width="46" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumtj}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="false">
+					<reportElement uuid="a4b61c03-17fd-43a2-859d-c8419ccb3365" key="textField-36" x="1295" y="0" width="55" height="20"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[(new BigDecimal($V{sumyh}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5b19e132-38d1-40f3-9700-8828a0b8b80e" key="staticText-1" x="2" y="0" width="2314" height="30"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H"/>
+				</textElement>
+				<text><![CDATA[直属点费用统计表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="9841e1ea-1b31-4f14-89eb-5b9513366d11" key="textField-11" style="pdf10" x="313" y="0" width="30" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FEEMONTH}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="1ae0fa7d-ca60-44b3-93d5-1e7fa27fb3b4" key="textField-13" style="pdf10" x="343" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FEESALES}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="4c12301a-8653-4076-91f0-088ebfb42279" key="textField-15" style="pdf10" x="1090" y="0" width="50" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEETAX}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="936806e8-8ff4-47b5-bd51-ab7aa9d242ab" key="textField-16" style="pdf10" x="1140" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEPENSION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="84a69a28-4f6c-49e7-ae60-0ff9e7cc15ed" key="textField-18" style="pdf10" x="1396" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEPAY}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="a796450c-ca2f-4bb8-9235-3f6263ddd97e" key="textField-21" style="pdf10" x="1536" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEAD}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="5878c5f4-756d-4a64-8d06-e96f96f7593d" key="textField-22" style="pdf10" x="1616" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEPHONE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="59ffd07d-ba3f-4c54-af22-bb8adb6013fa" key="textField-23" style="pdf10" x="1676" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEWATER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="bca00872-ceed-4319-aecf-2da2ea6a7cd0" key="textField-24" style="pdf10" x="1746" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEETRIP}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="57a81455-63e5-44e1-b247-c532b3b2a994" key="textField-25" style="pdf10" x="1806" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEPOSTAGE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="169a896e-70e5-4a38-b1cd-0ef4a11fab97" key="textField-26" style="pdf10" x="1866" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEOFFICE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="27fe72f2-e8a1-4b93-89af-6d3359f1ed8a" key="textField-27" style="pdf10" x="1936" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEESOCIAL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="511161a2-9b95-46e6-8ed1-3d922ffe7e00" key="textField-29" style="pdf10" x="1996" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEACCOUNT}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="7aabc3ad-8dba-493f-8dcd-b3e1cc8e4fbd" key="textField-30" style="pdf10" x="1022" y="0" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEINVOICE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="18491b42-8c35-46ea-9188-3f1ba6bab9ba" key="textField-31" style="pdf10" x="2056" y="0" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[(new BigDecimal($V{sumfee}.doubleValue()).setScale(2,BigDecimal.ROUND_HALF_UP))]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="6c9a3ac3-3807-4488-adb1-0e008dfdcfaa" key="textField-59" style="pdf10" x="969" y="0" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEMANAGE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="610e22d7-7fce-4770-964f-2d23f020ffa3" key="textField-11" style="pdf10" x="273" y="0" width="40" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FEEYEAR}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="600aae63-9118-47be-9b9e-fa9b25c428fe" key="textField-11" style="pdf10" x="182" y="0" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GCTNM}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="d9b79dc2-e625-4435-a3ba-e24b223e4cff" key="textField-11" style="pdf10" x="2" y="0" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GCTAREA}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement uuid="153ccd3d-4ecf-4bd8-8c1a-cdfb444c1cfd" key="textField-62" style="pdf10" x="108" y="0" width="74" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEGCTID}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="14af915a-9f00-4647-bbc8-758dac7978af" key="textField-7" style="pdf10" x="61" y="0" width="47" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AAA103}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="807492cc-9f47-4367-9450-98fc1120b6ff" key="textField-56" style="pdf10" x="1476" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEOTHERSA}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00">
+				<reportElement uuid="2c9a996f-c7da-4cc1-9c2e-d57b3be01237" x="2216" y="0" width="100" height="20">
+					<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["SUM(I"+$V{group_count_2}+":AH"+$V{group_count_2}+",-Q"+$V{group_count_2}+")"]]></propertyExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement uuid="05862239-c6a7-4a5f-a393-167caf497379" x="423" y="0" width="546" height="20"/>
+				<subreportParameter name="feegctid">
+					<subreportParameterExpression><![CDATA[$F{FEEGCTID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="feeyear">
+					<subreportParameterExpression><![CDATA[$F{FEEYEAR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="feemonth">
+					<subreportParameterExpression><![CDATA[$F{FEEMONTH}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="sum_rent" toVariable="sum_rent" calculation="Sum"/>
+				<returnValue subreportVariable="sum_built" toVariable="sum_built" calculation="Sum"/>
+				<returnValue subreportVariable="sum_open" toVariable="sum_open" calculation="Sum"/>
+				<returnValue subreportVariable="sum_trans" toVariable="sum_trans" calculation="Sum"/>
+				<returnValue subreportVariable="sum_assetscom" toVariable="sum_assetscom" calculation="Sum"/>
+				<returnValue subreportVariable="sum_assetscon" toVariable="sum_assetscon" calculation="Sum"/>
+				<returnValue subreportVariable="sum_assetsmach" toVariable="sum_assetsmach" calculation="Sum"/>
+				<returnValue subreportVariable="sum_other" toVariable="sum_other" calculation="Sum"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "companyfee_4_amortize.jasper"]]></subreportExpression>
+			</subreport>
+			<textField pattern="###0.00">
+				<reportElement uuid="6d3c5401-da44-40e4-ad6f-a80053dd200d" x="2156" y="0" width="60" height="20">
+					<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["ROUND(IF(H"+$V{group_count_2}+"=0,0,100*AI"+$V{group_count_2}+"/H"+$V{group_count_2}+"),2)"]]></propertyExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="b42511cf-1d39-4a67-963c-c201b6c28de9" key="textField-16" x="1200" y="0" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEPROCESS}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="37d83b76-758c-4854-bc37-e03c6709d240" key="textField-16" x="1247" y="0" width="48" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEPROMOTION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="b8de4d47-e989-42e3-9221-6387602a1a6e" key="textField-16" x="1350" y="0" width="46" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEBACK}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="5ed5ad38-6803-4296-98ef-f0f42d65de4a" key="textField-16" x="1295" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{FEEBENEFIT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="6df0d02e-bf59-489d-8ce3-9a5d778722b1" key="staticText-45" style="pdf10" x="313" y="0" width="30" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[总计]]></text>
+			</staticText>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="1b542366-ea98-4be8-b168-1623a9f90e50" key="textField-63" style="pdf10" x="343" y="0" width="80" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssxs}.toString()]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="6255e7e0-bfe3-44b5-8fe9-1bad1234f485" key="textField-64" style="pdf10" x="423" y="0" width="50" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssfz}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="4bf008bc-1725-489a-b01c-726c65daab0c" key="textField-66" style="pdf10" x="969" y="0" width="53" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssgl}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="e4afd3d9-826c-4f22-8754-a51a26ecb97d" key="textField-67" style="pdf10" x="1090" y="0" width="50" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssss}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="3b6a92fd-1315-45cd-9aa6-9293f16cb584" key="textField-68" style="pdf10" x="1140" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssyl}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="1264a6c9-0ece-44a4-9797-e938fe4a6413" key="textField-70" style="pdf10" x="1396" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssgz}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="5784e6f3-de1c-4a96-a8ca-80cc523c22f7" key="textField-71" style="pdf10" x="473" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sszx}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="c3313d65-db8d-400f-972c-e3a870f0a9a8" key="textField-72" style="pdf10" x="543" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sskb}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="53f9b32e-36ad-4ec3-b166-3f1890374c7b" key="textField-73" style="pdf10" x="1476" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sswqt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="873aef35-5b45-4b2e-981a-f643268d0da0" key="textField-74" style="pdf10" x="1536" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssgg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="0ea024f9-cf26-4478-930e-374a5b54224d" key="textField-75" style="pdf10" x="1616" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssdh}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="26d3ef1f-6ad0-4279-9d3d-3b04a2594957" key="textField-76" style="pdf10" x="1676" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sssd}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="f83587f4-1147-4d62-84d3-ada3bbb31656" key="textField-77" style="pdf10" stretchType="RelativeToTallestObject" x="1746" y="0" width="60" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sscl}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="7c389e0b-6a5b-4041-a042-8a5654fa87cb" key="textField-78" style="pdf10" x="1806" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssyf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="0dc0cf61-2566-4758-827c-53ae8d0aafab" key="textField-79" style="pdf10" x="1866" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssbg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="908efa69-d0ac-4ce4-afac-bf10dfaca123" key="textField-80" style="pdf10" x="1936" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssgongg}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="942d9341-54d8-4a03-98b0-280640099ec6" key="textField-82" style="pdf10" x="1996" y="0" width="60" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sskj}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="c7daf488-67a9-46a6-9257-db2b7421c095" key="textField-83" style="pdf10" x="1022" y="0" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssqt}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="4fb03db3-ff40-406d-8008-d17a811d07fc" key="textField-84" style="pdf10" x="2056" y="0" width="100" height="20" isPrintWhenDetailOverflows="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssfy}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="10a1369a-4e17-4b32-b9a7-c511726fac04" key="textField-86" style="pdf10" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="2216" y="0" width="100" height="20" isPrintWhenDetailOverflows="true">
+					<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["SUM(I"+$V{group_count_4}+":AH"+$V{group_count_4}+",-Q"+$V{group_count_4}+")"]]></propertyExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="db6fc205-8992-46d8-8b28-4e50cd2a0430" key="textField-89" style="pdf10" x="603" y="0" width="80" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sszrf}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="fde46e59-ff07-48bd-bc53-5ce51dcad0fe" key="textField-69" style="pdf10" x="752" y="0" width="68" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sscon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d5baec96-080e-464b-9348-ee9d7caa9260" x="2156" y="0" width="60" height="20">
+					<propertyExpression name="net.sf.jasperreports.export.xls.formula"><![CDATA["ROUND(IF(H"+$V{group_count_4}+"=0,0,100*AI"+$V{group_count_4}+"/H"+$V{group_count_4}+"),2)"]]></propertyExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression><![CDATA[]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39e4956e-f48f-4eff-b50b-9f84ac5ef641" x="683" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sscom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c133e6f9-2cd0-4fcc-9074-f6d57698e1a5" x="820" y="0" width="70" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssmach}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3d96b019-a45a-4bd3-a921-f5c79d82f478" x="890" y="0" width="79" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssothers}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="8cce5ece-7edf-49e4-a994-03d33566e25c" key="textField-68" x="1200" y="0" width="47" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sssx}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="523de841-02ad-4b37-94f4-5904603014bd" key="textField-68" x="1247" y="0" width="48" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sscx}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="e508b86c-330d-4f92-a8cf-10a3d30ebc6c" key="textField-68" x="1350" y="0" width="46" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sstj}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement uuid="30b2a7f0-567e-4adf-b2cc-529af89322de" key="textField-68" x="1295" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{ssyh}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="58" splitType="Stretch"/>
+	</summary>
+</jasperReport>
